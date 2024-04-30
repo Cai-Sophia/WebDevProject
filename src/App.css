@@ -3,19 +3,27 @@ body {
   height: 100vh;
 }
 
+.app {
+  display: flex;
+}
+
 /* NAV BAR */
 
   #nav-bar {
     width: 80vw;
+    height: 5vh;
     display: flex;
     color: white;
     justify-content: space-between;
     align-items: center;
     margin: 0 auto;
     margin-top: 5vh;
+    padding-bottom: 4vh;
+    margin-bottom: 1vh;
     font-family: 'Amiko', sans-serif;
     font-weight: 800;
     font-size: 25px;
+    border-bottom: 3px solid white;
   }
 
   #nav-buttons *{
@@ -30,14 +38,15 @@ body {
     color: #6D6969;
     font-family: 'Akshar', sans-serif;
     font-weight: 600;
-    font-size: 25px;
+    font-size: 23px;
     text-align: center;
-    margin: 10px;
+    margin-right: 10px;
+    margin-left: 10px;
     border: none;
     border-radius: 5px;
   }
 
-  .dropbtn {
+  .dropbtn, .dropdown-content {
     width: 200px;
     cursor: pointer;
   } 
@@ -64,4 +73,37 @@ body {
 
   #dropdown-menu:hover .dropdown-content {
     display: block;
+  }
+
+  /* HOME */
+
+  .home {
+    display: flex;
+    flex-direction: column;
+    justify-content: center; 
+    align-items: center; 
+    height: 75vh;
+    font-size: 25px;
+    font-family: 'Amiko', sans-serif;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.7);
+    position: relative;
+  }
+
+  .home-container {
+    position: relative;
+    width: 80%;
+    height: 80%;
+  }
+
+  .word {
+    position: absolute;
+  }
+
+  .title {
+    color: white;
+    font-size: 45px;
+    font-weight: 900;
+    margin-left: 150px;
+    margin-top: 150px;
   }
