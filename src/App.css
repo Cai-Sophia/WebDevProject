@@ -83,7 +83,6 @@ body {
     justify-content: center; 
     align-items: center; 
     height: 75vh;
-    font-size: 25px;
     font-family: 'Amiko', sans-serif;
     font-weight: 500;
     color: rgba(255, 255, 255, 0.7);
@@ -106,4 +105,17 @@ body {
     font-weight: 900;
     margin-left: 150px;
     margin-top: 150px;
+  }
+
+  .fade-out {
+    animation: fadeOut 4s ease-in-out alternate infinite;
+  }
+  
+  @keyframes fadeOut {
+    0% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0; /* Adjust opacity as needed */
+    }
   }

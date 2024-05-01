@@ -18,7 +18,7 @@ export async function getAccessToken() {
     return data.access_token;
 }
 
-async function fetchGameData(gameName) {
+export async function fetchGameData(gameName) {
     const accessToken = await getAccessToken();
 
     const response = await fetch('https://api.igdb.com/v4/games', {
