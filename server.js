@@ -22,7 +22,7 @@ app.post('/random-games', async (req, res) => {
             headers: {
                 'Client-ID': clientId,
                 'Authorization': `Bearer ${accessToken}`, 
-                'Content-Type': 'text/plain'
+                'Content-Type': 'application/json'
             },
             body: 'fields *;'
         });
@@ -34,6 +34,23 @@ app.post('/random-games', async (req, res) => {
         res.status(500).json({ error: 'Internal Server Error' });
     }
 });
+
+fetch(
+    "https://api.igdb.com/v4/age_ratings",
+    { method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Client-ID': 'gynkg0zhmuv2xlwdxxhq0fb8v6na9w',
+        'Authorization': 'Bearer ${accessToken}',
+      },
+      body: "fields category,checksum,content_descriptions,rating,rating_cover_url,synopsis;"
+  })
+    .then(response => {
+        console.log(response.json());
+    })
+    .catch(err => {
+        console.error(err);
+    });
 
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
