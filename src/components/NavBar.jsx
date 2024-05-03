@@ -5,8 +5,8 @@ const NavBar = () => {
         <div id='nav-parent'>
             <div id='nav-bar'>
                 <div id='nav-buttons'>
-                    <i class="fa-solid fa-bars" style={{fontSize:'25px'}}></i>
-                    <i class="fa-solid fa-house" style={{fontSize:'23px'}}></i>
+                    <i className="fa-solid fa-bars" style={{fontSize:'25px'}}></i>
+                    <i className="fa-solid fa-house" style={{fontSize:'23px'}}></i>
                 </div>
                 <div id='search-query'>
                     <div id='dropdown-menu'>
