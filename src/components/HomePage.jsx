@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { categories, wordPositions } from '../assets/data';
-import { getAccessToken } from "../utility/auth";
+import { getAccessToken } from '../utility/auth.js'; 
 
 const HomePage = () => {
 
@@ -17,11 +17,23 @@ const HomePage = () => {
       });
     }, 1000); 
     return () => clearInterval(interval); 
-  }, [categories]);
+  });
 
   /* fetching randomGames */
+
+  useEffect(() => {
+    randomRequest();
+  }, []);
+
   const randomRequest = () => {
-    fetch('http://localhost:8000/random-games')
+    fetch('http://localhost:8000/random-games', {
+      method: 'POST',
+      headers: {
+        'Client-ID': 'gynkg0zhmuv2xlwdxxhq0fb8v6na9w',
+        'Authorization': `Bearer ${getAccessToken()}`, 
+        'Content-Type': 'application/json'
+      },
+    })
       .then(response => response.json())
       .then(data => console.log(data))
   }

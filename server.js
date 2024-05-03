@@ -1,7 +1,7 @@
-const express = require('express');
-const cors = require('cors');
-const fetch = require('node-fetch'); 
-const { getAccessToken } = require('./src/utility/auth'); 
+import express from 'express'
+import cors from 'cors';
+import { getAccessToken } from './src/utility/auth.js'; 
+import fetch from 'node-fetch';
 
 const app = express()
 const port = 8000
@@ -28,9 +28,8 @@ app.post('/random-games', async (req, res) => {
     })
     response.json()
         .then(data => {
-            console.log(data); // Log the data received from the API
             res.json(data);
-    });
+        });
 });
 
 app.listen(port, () => {
