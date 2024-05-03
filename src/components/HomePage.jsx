@@ -20,24 +20,11 @@ const HomePage = () => {
   }, [categories]);
 
   /* fetching randomGames */
-  const [games, setGames] = useState([]);
-
-  useEffect(() => {
-    fetchRandomGames();
-  }, []);
-
-  const fetchRandomGames = async () => {
-    try {
-      const response = await fetch("http://localhost:8000/random-games");
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
-      }
-      const data = await response.json();
-      setGames(data);
-    } catch (error) {
-      console.error("Error fetching data:", error);
-    }
-  };
+  const randomRequest = () => {
+    fetch('http://localhost:8000/random-games')
+      .then(response => response.json())
+      .then(data => console.log(data))
+  }
   
   return (
     <div className="home">
@@ -58,16 +45,6 @@ const HomePage = () => {
       </div>
       <div className="top-games">
         <div className="top-games-title">TOP GAMES</div>
-          <ul>
-          {games.map((game) => (
-            <li key={game.id}>
-              <div>{game.name}</div>
-              <div>
-                <img src={game.cover.url} alt={game.name} />
-              </div>
-            </li>
-          ))}
-        </ul>
       </div>
     </div>
   );
