@@ -11,15 +11,15 @@ body {
 /* NAV BAR */
 
   #nav-bar {
-    width: 100%;
+    width: 100vw;
+    height: 3vh;
     background-color: rgb(26, 24, 30);
     opacity: .9;
-    color: white;
+    color: #beadcb;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
     padding: 4vh 0;
-    margin-bottom: 4vh;
     font-family: 'Amiko', sans-serif;
     font-weight: 800;
     font-size: 23px;
@@ -28,77 +28,54 @@ body {
     z-index: 1000;
   }
 
-  #nav-buttons *{
-    padding-right: 30px;
+  #nav-buttons {
+    width: 10vw;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-left: 11vw;
+  }
+
+  #nav-buttons *:hover {
+    color: #41304f;
+    cursor: pointer;
   }
 
   #search-query {
+    width: 20vw;
     display: flex;
-  }
-
-  #search-query * {
-    font-family: 'Akshar', sans-serif;
-    text-align: center;
-    height: 32px;
-    margin: 0 10px;
-  }
-
-  .dropbtn, .dropdown-content {
-    font-weight: 600;
-    color: #6D6969;
-    width: 200px;
-    cursor: pointer;
-    border: none;
-  } 
-
-  .dropbtn {
-    border-radius: 5px;
-    font-size: 20px;
+    align-items: center;
+    padding-right: 11vw;
   }
 
   .search-bar {
     width: 300px;
+    height: 32px;
+    background-color: #beadcb;
     font-size: 20px;
     font-weight: 600;
+    font-family: 'Akshar', sans-serif;
+    text-align: center;
+    margin-left: 10px;
     border: none;
-    border-radius: 5px;
-    text-decoration: none;
+    border-radius: 20px;
+  }
+
+  .search-bar:focus {
+    background-color: #f1ebf1;
+    outline: none;
   }
 
   input[type="text"] {
     padding-block: 0; 
     padding-inline: 0;
+    font-family: 'Amiko', sans-serif;
+    font-size: 15px;
+    font-weight: 200;
   }
 
   input {
     padding: 0;
-  }
-
-  .dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #6D6969;
-    width: 200px;
-    z-index: 1;
-  }
-
-  .dropdown-content a {
-    color: #ffffff;
-    font-family: 'Amiko', sans-serif !important;
-    font-size: 17px;
-    font-weight: 500;
-    display: block;
-    padding-top: 7px;
-    border-radius: 0;
-  }
-
-  .dropdown-content a:hover {
-    background-color: white;
-    color: #6D6969;
-  }
-
-  #dropdown-menu:hover .dropdown-content {
-    display: block;
   }
 
   /* HOME */
@@ -133,19 +110,72 @@ body {
     margin-top: 150px;
   }
 
-  .top-games {
+  .random-games {
     margin-top: 10rem;
-    height: 85vh;
   }
 
-  .top-games-title {
+  .random-games-title {
     color: white;
+    text-align: center;
     font-weight: 800;
     font-size: 30px;
+    margin-bottom: 50px;
+  }
+
+  .random-games-container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    overflow: wrap;
+    width: 60vw;
+  }
+
+  .game-card {
+    width: 16vw;
+    height: 40vh;
+    padding: 1rem;
+    margin: 5px;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column; 
+    align-items: center;
+    justify-content: flex-end;
+    border: 4px rgb(121, 112, 127) solid;
+    border-radius: 20px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    text-decoration: none;
+  }
+
+  .game-card:hover {
+    border: 4px rgb(67, 40, 85) solid;
+    background-color: rgb(255, 255, 255, .1);
+
+  }
+
+  .game-title {
+    text-align: center;
+    color: white;
+    font-size: 17px;
+    justify-self: flex-end;
+    margin-top: 25px;
+    margin-bottom: 0px;
+  }
+
+  .game-card img {
+    height: 90%;
+    width: 90%;
+  }
+
+  .game-card .image-container {
+    flex-grow: 1;
+    height: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .fade-out {
-    animation: fadeOut 4s ease-in-out alternate infinite;
+    animation: fadeOut 2s ease-in-out alternate infinite;
   }
   
   @keyframes fadeOut {

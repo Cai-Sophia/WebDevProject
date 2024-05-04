@@ -1,7 +1,14 @@
 const clientId = 'gynkg0zhmuv2xlwdxxhq0fb8v6na9w'; 
 const clientSecret = '2ve6ivha5hc7ki52xsmtbmfzqhp280'; 
 
+let accessToken = null;
+let tokenExpiration = 0;
+
 export async function getAccessToken() {
+    if (accessToken && Date.now() < tokenExpiration) {
+        return accessToken;
+    }
+
     const response = await fetch('https://id.twitch.tv/oauth2/token', {
         method: 'POST',
         headers: {
@@ -15,5 +22,8 @@ export async function getAccessToken() {
     });
 
     const data = await response.json();
-    return data.access_token;
+    accessToken = data.access_token;
+    tokenExpiration = Date.now() + (data.expires_in * 1000); 
+
+    return accessToken;
 }

@@ -3,10 +3,10 @@ import { categories, wordPositions } from '../assets/data';
 import { getAccessToken } from '../utility/auth.js'; 
 
 const HomePage = () => {
+  const [visibleWords, setVisibleWords] = useState({});
+  const [randomGames, setRandomGames] = useState([]);
 
   /* implementing fade-in / fade-out effect on categoriees*/
-  const [visibleWords, setVisibleWords] = useState({});
-
   useEffect(() => {
     const interval = setInterval(() => {
       const randomIndex = Math.floor(Math.random() * categories.length);
@@ -15,12 +15,11 @@ const HomePage = () => {
         updatedWords[randomIndex] = !updatedWords[randomIndex];
         return updatedWords;
       });
-    }, 1000); 
+    }, 2000); 
     return () => clearInterval(interval); 
   });
 
-  /* fetching randomGames */
-
+  /* fetching randomGames which returns 500 games */
   useEffect(() => {
     randomRequest();
   }, []);
@@ -34,8 +33,20 @@ const HomePage = () => {
         'Content-Type': 'application/json'
       },
     })
-      .then(response => response.json())
-      .then(data => console.log(data))
+    .then(response => response.json())
+    .then(data => {
+      // Filter out games without a cover
+      const gamesWithCover = data.filter(game => game.cover);
+      // Select 6 random games with cover
+      const randomGames = [];
+      while (randomGames.length < 6 && gamesWithCover.length > 0) {
+          const randomIndex = Math.floor(Math.random() * gamesWithCover.length);
+          const game = gamesWithCover.splice(randomIndex, 1)[0];
+          randomGames.push(game);
+      }
+      console.log(randomGames);
+      setRandomGames(randomGames); 
+    })
   }
   
   return (
@@ -55,8 +66,18 @@ const HomePage = () => {
           ))}
         <div className="title">DISCOVER NEW GAMES...</div>
       </div>
-      <div className="top-games">
-        <div className="top-games-title">TOP GAMES</div>
+      <div className="random-games">
+        <div className="random-games-title">RANDOM PICKS</div>
+        <div className="random-games-container"> 
+          {randomGames.map(game => (
+             <a key={game.id} href={game.url} className="game-card" target="_blank">
+              <div className="image-container">
+                {game.cover.url && <img src={`https:${game.cover.url.replace("t_thumb", "t_cover_big_2x")}`} alt={game.title} />}
+              </div>
+              <h3 className="game-title">{game.name}</h3>
+            </a>
+          ))}
+        </div>
       </div>
     </div>
   );
