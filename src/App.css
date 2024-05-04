@@ -2,6 +2,7 @@ body {
   background-image: linear-gradient(#1A1A1C, #38354F);
   margin: 0;
   padding: 0;
+  font-size: 1rem;
 }
 
 .app {
@@ -22,7 +23,7 @@ body {
     padding: 4vh 0;
     font-family: 'Amiko', sans-serif;
     font-weight: 800;
-    font-size: 23px;
+    font-size: 1.7em;
     position: fixed;
     top: 0;
     z-index: 1000;
@@ -30,6 +31,7 @@ body {
 
   #nav-buttons {
     width: 10vw;
+    max-width: 200px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -52,15 +54,15 @@ body {
     padding-right: 11vw;
   }
 
+
   .search-bar {
-    width: 300px;
-    height: 32px;
+    width: 14vw;
+    height: 2.7vh;
     background-color: #beadcb;
-    font-size: 20px;
     font-weight: 600;
     font-family: 'Akshar', sans-serif;
     text-align: center;
-    margin-left: 10px;
+    margin-left: .5vw;
     border: none;
     border-radius: 20px;
   }
@@ -74,7 +76,7 @@ body {
     padding-block: 0; 
     padding-inline: 0;
     font-family: 'Amiko', sans-serif;
-    font-size: 15px;
+    font-size: .7em;
     font-weight: 200;
   }
 
@@ -97,9 +99,9 @@ body {
 
   .word-container {
     position: relative;
-    width: 80%;
+    width: 75vw;
     height: 60vh;
-    margin-top: 225px;
+    margin-top: 25vh;
   }
 
   .word {
@@ -108,22 +110,19 @@ body {
 
   .title {
     color: white;
-    font-size: 45px;
+    font-size: 3.5em;
     font-weight: 900;
-    margin-left: 150px;
-    margin-top: 150px;
-  }
-
-  .random-games {
-    margin-top: 10rem;
+    margin-left: 10vw;
+    margin-top: 16vh;
   }
 
   .random-games-title {
+    margin-top: 15vh;
     color: white;
     text-align: center;
     font-weight: 800;
-    font-size: 30px;
-    margin-bottom: 50px;
+    font-size: 2.2em;
+    margin-bottom: 5vh;
   }
 
   .random-games-container {
@@ -131,20 +130,22 @@ body {
     justify-content: space-between;
     flex-wrap: wrap;
     overflow: wrap;
-    width: 60vw;
+    width: 62vw;
+    margin-bottom: 3vw;
   }
 
   .game-card {
-    width: 16vw;
-    height: 40vh;
-    padding: 1rem;
-    margin: 5px;
-    margin-bottom: 20px;
+    width: 13vw;
+    height: 34vh;
+    padding: 1em;
+    padding-top: 1.5em;
+    margin-bottom: 1vw;
     display: flex;
     flex-direction: column; 
     align-items: center;
     justify-content: flex-end;
-    border: 4px rgb(121, 112, 127) solid;
+    background-color: rgb(40, 35, 44, .5);
+    border: 5px rgb(121, 112, 127) solid;
     border-radius: 20px;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
     text-decoration: none;
@@ -159,15 +160,15 @@ body {
   .game-title {
     text-align: center;
     color: white;
-    font-size: 17px;
+    font-size: 1.1em;
     justify-self: flex-end;
-    margin-top: 25px;
-    margin-bottom: 0px;
+    margin-top: 1.5em;
   }
 
   .game-card img {
-    height: 90%;
-    width: 90%;
+    max-height: 100%;
+    max-width: 100%;
+
   }
 
   .game-card .image-container {

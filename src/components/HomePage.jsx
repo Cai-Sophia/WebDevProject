@@ -39,7 +39,7 @@ const HomePage = () => {
       const gamesWithCover = data.filter(game => game.cover);
       // Select 6 random games with cover
       const randomGames = [];
-      while (randomGames.length < 6 && gamesWithCover.length > 0) {
+      while (randomGames.length < 8 && gamesWithCover.length > 0) {
           const randomIndex = Math.floor(Math.random() * gamesWithCover.length);
           const game = gamesWithCover.splice(randomIndex, 1)[0];
           randomGames.push(game);
