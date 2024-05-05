@@ -34,37 +34,20 @@ app.post('/random-games', async (req, res) => {
 
 app.post('/search', async (req, res) => {
     const accessToken = await getAccessToken();
-    const searchTerm = req.body.search;
-    const response = await fetch('https://api.igdb.com/v4/search', {
+    const searchTerm = req.body.searchTerm;
+    const response = await fetch('https://api.igdb.com/v4/games', {
         method: 'POST',
         headers: {
             'Client-ID': clientId,
             'Authorization': `Bearer ${accessToken}`, 
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({search: searchTerm})
+        body: `fields name, url, cover.url; search "${searchTerm}";`
     })
     response.json()
         .then(data => {
             res.json(data);
         });
-});
-
-app.post('/getgame', async (req, res) => {
-    const accessToken = await getAccessToken();
-    const response = await fetch('https://api.igdb.com/v4/games/', {
-        method: 'POST',
-        headers: {
-            'Client-ID': clientId,
-            'Authorization': `Bearer ${accessToken}`, 
-            'Content-Type': 'application/json'
-        },
-        body: 'fields name, url, cover.url; where id = 1942;'
-    })
-    .then(response => response.json())
-    .then(data => {
-        res.json(data);
-    })
 });
 
 app.listen(port, () => {

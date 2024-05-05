@@ -44,7 +44,7 @@ const HomePage = () => {
           const game = gamesWithCover.splice(randomIndex, 1)[0];
           randomGames.push(game);
       }
-      console.log(randomGames);
+
       setRandomGames(randomGames); 
     })
   }
