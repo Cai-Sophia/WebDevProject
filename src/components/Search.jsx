@@ -23,18 +23,29 @@ const Search = () => {
         };
         searchRequest();
     }, [params.term]);
-
+    console.log(searchResults)
 
     return (
         <div id='search-parent'>
-            <div className="search-title">Search results for '{params.term}'</div>
-            <div className="searchResults"> 
+            <div className="search-title">Found {searchResults.length} results for '{params.term}'</div>
+            <div className="search-line"/>
+            <div className="search-results"> 
                 {searchResults.map(game => (
                     <a key={game.id} href={game.url} className="search-card" target="_blank">
-                    <div className="search-image">
-                        {game.cover.url && <img src={`https:${game.cover.url.replace("t_thumb", "t_cover_big_2x")}`} alt={game.title} />}
-                    </div>
-                    <h3 className="search-game-title">{game.name}</h3>
+                        {game.cover?.url ? (
+                            <img className="image" src={`https:${game.cover.url.replace("t_thumb", "t_cover_small_2x")}`} alt={game.title} />
+                        ):(
+                            <h1 className="image-alt"> No photo available </h1>
+                        )}
+                        <div className="search-text">
+                            <h3 className="search-game-title">{game.name}</h3>
+                            {game.summary ? (
+                                <p className={`search-game-summary ${game.summary.length > 200 ? 'scrollable' : ''}`}> {game.summary}
+                                </p>
+                            ):(
+                                <p className="search-game-summary">No summary available</p>
+                            )}
+                        </div>
                     </a>
                 ))}
             </div>
