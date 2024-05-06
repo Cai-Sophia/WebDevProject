@@ -182,16 +182,16 @@ input {
   justify-content: center;
 }
 
-.fade-out {
-  animation: fadeOut 2s ease-in-out alternate infinite;
+.fade-in {
+  animation: fadeIn 3s ease-in-out alternate infinite;
 }
 
-@keyframes fadeOut {
+@keyframes fadeIn {
   0% {
     opacity: 1;
   }
   100% {
-    opacity: 0; /* Adjust opacity as needed */
+    opacity: 0;
   }
 }
 

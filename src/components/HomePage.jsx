@@ -55,7 +55,7 @@ const HomePage = () => {
         {categories.map((category, index) => (
           <div
             key={index}
-            className={`word ${visibleWords[index] ? "fade-out" : ""}`}
+            className={`word ${visibleWords[index] ? "fade-in" : ""}`}
             style={{
               left: wordPositions[index].left,
               top: wordPositions[index].top,
