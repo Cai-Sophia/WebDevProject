@@ -30,7 +30,7 @@ app.get('/', (req, res) => {
 
 const clientId = 'gynkg0zhmuv2xlwdxxhq0fb8v6na9w'; 
 
-app.post('/random-games', async (req, res) => {
+app.post('/get-games', async (req, res) => {
     const accessToken = await getAccessToken();
     const response = await fetch('https://api.igdb.com/v4/games', {
         method: 'POST',
@@ -40,6 +40,24 @@ app.post('/random-games', async (req, res) => {
             'Content-Type': 'application/json'
         },
         body: 'fields name, url, cover.url; limit 500;'
+    })
+    response.json()
+        .then(data => {
+            res.json(data);
+        });
+});
+
+app.post('/get-similar', async (req, res) => {
+    const accessToken = await getAccessToken();
+    const similarGames = req.body.similarGames
+    const response = await fetch('https://api.igdb.com/v4/games', {
+        method: 'POST',
+        headers: {
+            'Client-ID': clientId,
+            'Authorization': `Bearer ${accessToken}`, 
+            'Content-Type': 'application/json'
+        },
+        body: `fields name, url, cover.url; where id = (${similarGames});`
     })
     response.json()
         .then(data => {
@@ -57,14 +75,30 @@ app.post('/search', async (req, res) => {
             'Authorization': `Bearer ${accessToken}`, 
             'Content-Type': 'application/json'
         },
-        // body: `fields name, url, cover.url, summary; search "${searchTerm}"; limit 50;`
-        body: `fields *; search "${searchTerm}"; limit 50;`
-    })
+        body: `fields name, url, cover.url, summary, aggregated_rating, similar_games, platforms; search "${searchTerm}"; limit 50;`
+    });
     response.json()
-        .then(data => {
+        .then(async data => {
+            // for (const game of data) {
+            //     if (game.platforms) {
+            //         const platformString = game.platforms.join(',');
+            //         const platformDetailsResponse = await fetch(`https://api.igdb.com/v4/platforms`, {
+            //             method: 'POST',
+            //             headers: {
+            //                 'Client-ID': clientId,
+            //                 'Authorization': `Bearer ${accessToken}`, 
+            //                 'Content-Type': 'application/json'
+            //             },
+            //             body: `fields name; where id = (${platformString});`
+            //         });
+            //         const platformDetails = await platformDetailsResponse.json();
+            //         game.platforms = platformDetails;
+            //     }
+            // }
             res.json(data);
         });
 });
+
 
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);

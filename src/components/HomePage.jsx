@@ -25,7 +25,7 @@ const HomePage = () => {
   }, []);
 
   const randomRequest = () => {
-    fetch('http://localhost:8000/random-games', {
+    fetch('http://localhost:8000/get-games', {
       method: 'POST',
       headers: {
         'Client-ID': 'gynkg0zhmuv2xlwdxxhq0fb8v6na9w',
