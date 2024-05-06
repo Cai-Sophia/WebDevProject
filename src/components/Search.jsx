@@ -28,6 +28,8 @@ const Search = () => {
         navigate(`/similar-games/${game.id}`, { state: { game } });
     };
 
+    console.log(searchResults)
+
     return (
         <div id='search-parent'>
             <div className="search-title">
@@ -50,12 +52,13 @@ const Search = () => {
                                 onClick={() => handleGameClick(game)}
                             > {game.name}
                             </div>
-                                {game.aggregated_rating? (
-                                    <h3 className="game-rating">RATING: {Math.round(game.aggregated_rating)}</h3>
-                                ):(
-                                    <h3 className="game-rating">RATING: N/A</h3>
-                                )}
-                            </div>
+                            {game.aggregated_rating? (
+                                <h3 className="game-rating">RATING: {Math.round(game.aggregated_rating)}</h3>
+                            ):(
+                                <h3 className="game-rating">RATING: N/A</h3>
+                            )}
+                            <div className="gameKeywords">
+                        </div>
                             {game.summary ? (
                                 <p className={`search-game-summary ${game.summary.length > 200 ? 'scrollable' : ''}`}> {game.summary}
                                 </p>
