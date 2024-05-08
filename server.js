@@ -1,6 +1,6 @@
 import express from 'express'
 import cors from 'cors';
-import { getAccessToken } from './src/utility/auth.js'; 
+import { getAccessToken } from './src/utility/auth.js';
 import fetch from 'node-fetch';
 import path from 'path';
 import { fileURLToPath } from 'url';
@@ -15,7 +15,7 @@ app.get('/', (req, res) => {
     res.send('ExpressJS server response OK!');
 });
 
-const clientId = 'gynkg0zhmuv2xlwdxxhq0fb8v6na9w'; 
+const clientId = 'gynkg0zhmuv2xlwdxxhq0fb8v6na9w';
 
 app.post('/get-games', async (req, res) => {
     const accessToken = await getAccessToken();
@@ -23,7 +23,7 @@ app.post('/get-games', async (req, res) => {
         method: 'POST',
         headers: {
             'Client-ID': clientId,
-            'Authorization': `Bearer ${accessToken}`, 
+            'Authorization': `Bearer ${accessToken}`,
             'Content-Type': 'application/json'
         },
         body: 'fields name, url, cover.url; limit 500; where themes != (42);'
@@ -41,7 +41,7 @@ app.post('/search', async (req, res) => {
         method: 'POST',
         headers: {
             'Client-ID': clientId,
-            'Authorization': `Bearer ${accessToken}`, 
+            'Authorization': `Bearer ${accessToken}`,
             'Content-Type': 'application/json'
         },
         body: `fields name, url, cover.url, summary, aggregated_rating, similar_games, keywords.name, platforms; search "${searchTerm}"; limit 50;`
@@ -59,7 +59,7 @@ app.post('/get-similar', async (req, res) => {
         method: 'POST',
         headers: {
             'Client-ID': clientId,
-            'Authorization': `Bearer ${accessToken}`, 
+            'Authorization': `Bearer ${accessToken}`,
             'Content-Type': 'application/json'
         },
         body: `fields name, url, cover.url; where id = (${similarGames});`

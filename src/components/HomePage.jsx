@@ -1,10 +1,32 @@
 import React, { useState, useEffect } from "react";
 import { categories, wordPositions } from '../assets/data';
 import { getAccessToken } from '../utility/auth.js';
+import { MongoClient } from 'mongodb';
+
 
 const HomePage = () => {
   const [visibleWords, setVisibleWords] = useState({});
   const [randomGames, setRandomGames] = useState([]);
+
+  const url = 'mongodb+srv://al0984528:DemoDataBase@cluster1.wzrcl0j.mongodb.net/?retryWrites=true&w=majority&appName=Cluster1';
+  const dbName = 'WebDevProject';
+  const client = new MongoClient(url);
+
+  const handleFavoriteClick = async (game) => {
+    try {
+      await client.connect();
+      const db = client.db(dbName);
+      const collection = db.collection('favorites');
+      const insertResult = await collection.insertOne([JSON.stringify(game)]);
+      console.log('Inserted game into MongoDB:', insertResult);
+    } catch (error) {
+      console.error('Error inserting game into MongoDB:', error);
+    } finally {
+      await client.close();
+    }
+  };
+
+
 
   /* implementing fade-in / fade-out effect on categoriees*/
   useEffect(() => {
@@ -50,11 +72,13 @@ const HomePage = () => {
   }
 
 
-  const handleFavoriteClick = (game) => {
-    console.log("Clicked game data:", game);
-    // Save the game data locally
-    localStorage.setItem(game.id, JSON.stringify(game));
-  };
+  // // local storage method
+  // const handleFavoriteClick = (game) => {
+  //   console.log("Clicked game data:", game);
+  //   // Save the game data locally
+  //   localStorage.setItem(game.id, JSON.stringify(game));
+  // };
+
 
 
   return (
