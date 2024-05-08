@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { getAccessToken } from '../utility/auth.js'; 
+import { getAccessToken } from '../utility/auth.js';
 import { useNavigate, useParams } from "react-router-dom";
 
 const Search = () => {
@@ -13,7 +13,7 @@ const Search = () => {
                 method: 'POST',
                 headers: {
                     'Client-ID': 'gynkg0zhmuv2xlwdxxhq0fb8v6na9w',
-                    'Authorization': `Bearer ${getAccessToken()}`, 
+                    'Authorization': `Bearer ${getAccessToken()}`,
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({ searchTerm: params.term })
@@ -37,7 +37,7 @@ const Search = () => {
                 <div className="instructions">CLICK ANY GAME TO DISCOVER NEW ONES</div>
             </div>
             <div className="search-line"/>
-            <div className="search-results"> 
+            <div className="search-results">
                 {searchResults.map(game => (
                     <div key={game.id} className="search-card">
                         {game.cover?.url ? (
@@ -68,6 +68,7 @@ const Search = () => {
                             <a href={game.url} className="learn-more" target="_blank">LEARN MORE</a>
                         </div>
                     </div>
+                </div>
                 ))}
             </div>
         </div>

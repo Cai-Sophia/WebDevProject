@@ -77,7 +77,7 @@ body {
 }
 
 input[type="text"] {
-  padding-block: 0; 
+  padding-block: 0;
   padding-inline: 0;
   font-family: 'Amiko', sans-serif;
   font-size: .7em;
@@ -93,8 +93,8 @@ input {
 .home {
   display: flex;
   flex-direction: column;
-  justify-content: center; 
-  align-items: center; 
+  justify-content: center;
+  align-items: center;
   font-family: 'Amiko', sans-serif;
   font-weight: 500;
   color: rgba(255, 255, 255, 0.7);
@@ -146,7 +146,7 @@ input {
   padding-top: 1.5em;
   margin-bottom: 1vw;
   display: flex;
-  flex-direction: column; 
+  flex-direction: column;
   align-items: center;
   justify-content: flex-end;
   background-color: rgb(40, 35, 44, .5);
@@ -185,6 +185,17 @@ input {
 .fade-out {
   animation: fadeOut 2s ease-in-out alternate infinite;
 }
+
+.game-link {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  text-decoration: none;
+}
+
 
 @keyframes fadeOut {
   0% {
@@ -258,7 +269,7 @@ input {
 }
 
 .image-alt{
-  display: flex; 
+  display: flex;
   justify-content: center;
   align-items: center;
   color:#908f9f;
@@ -398,6 +409,3 @@ input {
   width: 100%;
   height: 100%;
 }
-
-
-

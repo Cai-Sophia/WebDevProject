@@ -2,7 +2,7 @@ import './App.css';
 import NavBar from "./components/NavBar.jsx";
 import HomePage from './components/HomePage.jsx';
 import Search from './components/Search.jsx';
-import SimilarGames from './components/Similar.jsx'; 
+import SimilarGames from './components/Similar.jsx';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 function App() {

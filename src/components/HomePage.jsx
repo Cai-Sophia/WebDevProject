@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { categories, wordPositions } from '../assets/data';
-import { getAccessToken } from '../utility/auth.js'; 
+import { getAccessToken } from '../utility/auth.js';
 
 const HomePage = () => {
   const [visibleWords, setVisibleWords] = useState({});
@@ -15,8 +15,8 @@ const HomePage = () => {
         updatedWords[randomIndex] = !updatedWords[randomIndex];
         return updatedWords;
       });
-    }, 2000); 
-    return () => clearInterval(interval); 
+    }, 2000);
+    return () => clearInterval(interval);
   });
 
   /* fetching randomGames which returns 500 games */
@@ -29,7 +29,7 @@ const HomePage = () => {
       method: 'POST',
       headers: {
         'Client-ID': 'gynkg0zhmuv2xlwdxxhq0fb8v6na9w',
-        'Authorization': `Bearer ${getAccessToken()}`, 
+        'Authorization': `Bearer ${getAccessToken()}`,
         'Content-Type': 'application/json'
       },
     })
@@ -45,17 +45,25 @@ const HomePage = () => {
           randomGames.push(game);
       }
 
-      setRandomGames(randomGames); 
+      setRandomGames(randomGames);
     })
   }
-  
+
+
+  const handleFavoriteClick = (game) => {
+    console.log("Clicked game data:", game);
+    // Save the game data locally
+    localStorage.setItem(game.id, JSON.stringify(game));
+  };
+
+
   return (
     <div className="home">
       <div className="word-container">
         {categories.map((category, index) => (
           <div
             key={index}
-            className={`word ${visibleWords[index] ? "fade-out" : ""}`}
+            className={`word ${visibleWords[index] ? "fade-in" : ""}`}
             style={{
               left: wordPositions[index].left,
               top: wordPositions[index].top,
@@ -68,19 +76,24 @@ const HomePage = () => {
       </div>
       <div className="random-games">
         <div className="random-games-title">RANDOM PICKS</div>
-        <div className="random-games-container"> 
+        <div className="random-games-container">
           {randomGames.map(game => (
-             <a key={game.id} href={game.url} className="game-card" target="_blank">
-              <div className="image-container">
-                {game.cover.url && <img src={`https:${game.cover.url.replace("t_thumb", "t_cover_big_2x")}`} alt={game.title} />}
-              </div>
-              <h3 className="game-title">{game.name}</h3>
-            </a>
+            <div key={game.id} className="game-card">
+              <a href={game.url} target="_blank" className="game-link">
+                <div className="image-container">
+                  {game.cover.url && <img src={`https:${game.cover.url.replace("t_thumb", "t_cover_big_2x")}`} alt={game.title} />}
+                </div>
+                <h3 className="game-title">{game.name}</h3>
+              </a>
+              <button onClick={() => handleFavoriteClick(game)}>
+                <i className="fas fa-heart"></i> Favorite
+              </button>
+            </div>
           ))}
         </div>
       </div>
     </div>
   );
 };
-    
+
 export default HomePage;
