@@ -1,34 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { categories, wordPositions } from '../assets/data';
 import { getAccessToken } from '../utility/auth.js';
-import { MongoClient } from 'mongodb';
-
 
 const HomePage = () => {
   const [visibleWords, setVisibleWords] = useState({});
   const [randomGames, setRandomGames] = useState([]);
 
-  const url = 'mongodb+srv://al0984528:DemoDataBase@cluster1.wzrcl0j.mongodb.net/?retryWrites=true&w=majority&appName=Cluster1';
-  const dbName = 'WebDevProject';
-  const client = new MongoClient(url);
-
-  const handleFavoriteClick = async (game) => {
-    try {
-      await client.connect();
-      const db = client.db(dbName);
-      const collection = db.collection('favorites');
-      const insertResult = await collection.insertOne([JSON.stringify(game)]);
-      console.log('Inserted game into MongoDB:', insertResult);
-    } catch (error) {
-      console.error('Error inserting game into MongoDB:', error);
-    } finally {
-      await client.close();
-    }
-  };
-
-
-
-  /* implementing fade-in / fade-out effect on categoriees*/
   useEffect(() => {
     const interval = setInterval(() => {
       const randomIndex = Math.floor(Math.random() * categories.length);
@@ -41,7 +18,6 @@ const HomePage = () => {
     return () => clearInterval(interval);
   });
 
-  /* fetching randomGames which returns 500 games */
   useEffect(() => {
     randomRequest();
   }, []);
@@ -57,29 +33,40 @@ const HomePage = () => {
     })
     .then(response => response.json())
     .then(data => {
-      // Filter out games without a cover
       const gamesWithCover = data.filter(game => game.cover);
-      // Select 6 random games with cover
       const randomGames = [];
       while (randomGames.length < 8 && gamesWithCover.length > 0) {
           const randomIndex = Math.floor(Math.random() * gamesWithCover.length);
           const game = gamesWithCover.splice(randomIndex, 1)[0];
           randomGames.push(game);
       }
-
       setRandomGames(randomGames);
     })
   }
 
-
-  // // local storage method
-  // const handleFavoriteClick = (game) => {
-  //   console.log("Clicked game data:", game);
-  //   // Save the game data locally
-  //   localStorage.setItem(game.id, JSON.stringify(game));
-  // };
-
-
+  const handleFavoriteClick = async (game) => {
+    try {
+      const response = await fetch('http://localhost:8000/insert-favorite', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: game.name,
+          url: game.url,
+          coverUrl: game.cover.url,
+          // Add other relevant fields as needed
+        }),
+      });
+      if (response.ok) {
+        console.log('Favorite game added successfully');
+      } else {
+        console.error('Failed to add favorite game');
+      }
+    } catch (error) {
+      console.error('Error adding favorite game:', error);
+    }
+  };
 
   return (
     <div className="home">
