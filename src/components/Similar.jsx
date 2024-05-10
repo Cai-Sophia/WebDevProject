@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useLocation } from 'react-router-dom';
-import { getAccessToken } from '../utility/auth.js'; 
+import { getAccessToken } from '../utility/auth.js';
 
 const SimilarGames = () => {
     const location = useLocation();
@@ -14,17 +14,17 @@ const SimilarGames = () => {
             method: 'POST',
             headers: {
                 'Client-ID': 'gynkg0zhmuv2xlwdxxhq0fb8v6na9w',
-                'Authorization': `Bearer ${getAccessToken()}`, 
+                'Authorization': `Bearer ${getAccessToken()}`,
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({ similarGames: similarGames })
-            
+
             })
             .then(response => response.json())
             .then(data => {
                 setSimilarResponse(data);
             })
-        };       
+        };
         getSimilar()
     }, [similarGames]);
 

@@ -5,6 +5,8 @@ import { getAccessToken } from '../utility/auth.js';
 const HomePage = () => {
   const [visibleWords, setVisibleWords] = useState({});
   const [randomGames, setRandomGames] = useState([]);
+  const [favorites, setFavorites] = useState([]);
+  const [errorMessage, setErrorMessage] = useState('');
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -21,6 +23,15 @@ const HomePage = () => {
   useEffect(() => {
     randomRequest();
   }, []);
+
+  useEffect(() => {
+    if (errorMessage) {
+      const timeout = setTimeout(() => {
+        setErrorMessage('');
+      }, 3000);
+      return () => clearTimeout(timeout);
+    }
+  }, [errorMessage]);
 
   const randomRequest = () => {
     fetch('http://localhost:8000/get-games', {
@@ -45,6 +56,10 @@ const HomePage = () => {
   }
 
   const handleFavoriteClick = async (game) => {
+    if (favorites.find(favorite => favorite.name === game.name)) {
+      setErrorMessage('Game already added to favorites');
+      return;
+    }
     try {
       const response = await fetch('http://localhost:8000/insert-favorite', {
         method: 'POST',
@@ -58,6 +73,8 @@ const HomePage = () => {
         }),
       });
       if (response.ok) {
+        setFavorites([...favorites, game]);
+        setErrorMessage('');
         console.log('Favorite game added successfully');
       } else {
         console.error('Failed to add favorite game');
@@ -101,6 +118,7 @@ const HomePage = () => {
             </div>
           ))}
         </div>
+        {errorMessage && <p className="error-message">{errorMessage}</p>}
       </div>
     </div>
   );
