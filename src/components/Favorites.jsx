@@ -4,32 +4,26 @@ const Favorites = () => {
   const [favoriteGames, setFavoriteGames] = useState([]);
 
   useEffect(() => {
-    fetch('http://localhost:8000/test') // Fetching all games from the test endpoint
+    fetch('http://localhost:8000/test')
       .then(response => response.json())
       .then(data => setFavoriteGames(data))
       .catch(error => console.error('Error fetching favorite games:', error));
   }, []);
 
-  const handleFavoriteClick = async (game) => {
+  const handleRemoveFavorite = async (gameId) => {
     try {
-      const response = await fetch('http://localhost:8000/insert-favorite', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          name: game.name,
-          url: game.url,
-          coverUrl: game.coverUrl,
-        }),
+      const response = await fetch(`http://localhost:8000/remove-favorite/${gameId}`, {
+        method: 'DELETE',
       });
       if (response.ok) {
-        console.log('Favorite game added successfully');
+        console.log('Favorite game removed successfully');
+        // Remove the game from the state
+        setFavoriteGames(prevFavoriteGames => prevFavoriteGames.filter(game => game._id !== gameId));
       } else {
-        console.error('Failed to add favorite game');
+        console.error('Failed to remove favorite game');
       }
     } catch (error) {
-      console.error('Error adding favorite game:', error);
+      console.error('Error removing favorite game:', error);
     }
   };
 
@@ -45,7 +39,7 @@ const Favorites = () => {
               </div>
               <h3 className="game-title">{game.name}</h3>
             </a>
-            <button onClick={() => handleFavoriteClick(game)}>
+            <button onClick={() => handleRemoveFavorite(game._id)}>
               <i className="fas fa-heart"></i> Remove Favorite
             </button>
           </div>

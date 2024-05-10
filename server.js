@@ -63,6 +63,22 @@ app.get('/test', async (req, res) => {
   }
 });
 
+// Route handler to remove a favorite game from MongoDB
+app.delete('/remove-favorite/:id', async (req, res) => {
+  try {
+    const gameId = req.params.id;
+    const deletedGame = await FavoriteGame.findByIdAndDelete(gameId);
+    if (!deletedGame) {
+      return res.status(404).json({ error: 'Game not found' });
+    }
+    res.json({ message: 'Favorite game removed successfully', deletedGame });
+  } catch (error) {
+    console.error('Error removing favorite game:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
+
 
 
 /*--------------------------------------------------------------------------------------------------*/
