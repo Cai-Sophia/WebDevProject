@@ -55,7 +55,6 @@ const HomePage = () => {
           name: game.name,
           url: game.url,
           coverUrl: game.cover.url,
-          // Add other relevant fields as needed
         }),
       });
       if (response.ok) {

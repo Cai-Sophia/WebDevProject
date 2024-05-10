@@ -11,7 +11,7 @@ app.use(cors());
 app.use(express.json());
 
 // MongoDB Connection
-const url = 'mongodb+srv://al0984528:DemoDataBase@cluster1.wzrcl0j.mongodb.net/WebDevProject?retryWrites=true&w=majority&appName=Cluster1';
+const url = 'mongodb+srv://al0984528:DemoDataBase@cluster1.wzrcl0j.mongodb.net/?retryWrites=true&w=majority&appName=Cluster1'
 
 mongoose.connect(url)
   .then(() => {
@@ -40,15 +40,32 @@ app.post('/insert-favorite', async (req, res) => {
       name,
       url,
       coverUrl,
-      // Assign other fields as needed
     });
     await newFavoriteGame.save();
+    // console.log(newFavoriteGame);
     res.status(201).json({ message: 'Favorite game added successfully' });
   } catch (error) {
     console.error('Error inserting favorite game:', error);
     res.status(500).json({ error: 'Internal server error' });
   }
 });
+
+
+
+// Route handler to fetch all data from MongoDB
+app.get('/test', async (req, res) => {
+  try {
+    const allData = await FavoriteGame.find();
+    res.json(allData); // Sending JSON response
+  } catch (error) {
+    console.error('Error fetching all data from MongoDB:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
+
+
+/*--------------------------------------------------------------------------------------------------*/
 
 const clientId = 'gynkg0zhmuv2xlwdxxhq0fb8v6na9w';
 
@@ -99,16 +116,7 @@ app.post('/get-similar', async (req, res) => {
     res.json(data);
 });
 
-app.get('/favorites', async (req, res) => {
-    try {
-      // Retrieve favorite games from MongoDB
-      const favoriteGames = await FavoriteGame.find();
-      res.json(favoriteGames);
-    } catch (error) {
-      console.error('Error retrieving favorite games:', error);
-      res.status(500).json({ error: 'Internal server error' });
-    }
-  });
+
 
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
