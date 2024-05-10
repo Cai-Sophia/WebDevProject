@@ -34,9 +34,9 @@ const Favorites = () => {
   };
 
   return (
-    <div>
-      <h1>All Games</h1>
-      <div className="games-container">
+    <div className='favorite-page'>
+      <div className='favorite-game-header'>My Favorites</div>
+      <div className="favorite-games-container">
         {favoriteGames.map(game => (
           <div key={game._id} className="game-card">
             <a href={game.url} target="_blank" className="game-link">
@@ -46,7 +46,7 @@ const Favorites = () => {
               <h3 className="game-title">{game.name}</h3>
             </a>
             <button onClick={() => handleFavoriteClick(game)}>
-              <i className="fas fa-heart"></i> Favorite
+              <i className="fas fa-heart"></i> Remove Favorite
             </button>
           </div>
         ))}
