@@ -26,7 +26,6 @@ const favoriteGameSchema = new mongoose.Schema({
   name: String,
   url: String,
   coverUrl: String,
-  // Add other relevant fields as needed
 });
 
 // Define Mongoose model for favorite games
