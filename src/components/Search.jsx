@@ -57,7 +57,7 @@ const Search = () => {
                             ):(
                                 <h3 className="game-rating">RATING: N/A</h3>
                             )}
-                            <div className="gameKeywords">
+                            <div className="gameKeywords"></div>
                         </div>
                             {game.summary ? (
                                 <p className={`search-game-summary ${game.summary.length > 200 ? 'scrollable' : ''}`}> {game.summary}
