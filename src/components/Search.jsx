@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { getAccessToken } from '../utility/auth.js'; 
+import { getAccessToken } from '../utility/auth.js';
 import { useNavigate, useParams } from "react-router-dom";
 
 const Search = () => {
     const params = useParams();
     const navigate = useNavigate();
     const [searchResults, setsearchResults] = useState([]);
+    const [favorites, setFavorites] = useState([]);
+    const [errorMessage, setErrorMessage] = useState('');
+    const [successMessage, setSuccessMessage] = useState('');
 
     useEffect(() => {
         const searchRequest = async () => {
@@ -13,7 +16,7 @@ const Search = () => {
                 method: 'POST',
                 headers: {
                     'Client-ID': 'gynkg0zhmuv2xlwdxxhq0fb8v6na9w',
-                    'Authorization': `Bearer ${getAccessToken()}`, 
+                    'Authorization': `Bearer ${getAccessToken()}`,
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({ searchTerm: params.term })
@@ -30,6 +33,40 @@ const Search = () => {
 
     console.log(searchResults)
 
+
+    const handleFavoriteClick = async (game) => {
+        const isAlreadyFavorite = favorites.some(favorite => favorite.name === game.name);
+
+        if (isAlreadyFavorite) {
+            setErrorMessage('Game already added to favorites');
+        } else {
+            try {
+                const response = await fetch('http://localhost:8000/insert-favorite', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        name: game.name,
+                        url: game.url,
+                        coverUrl: game.cover?.url,
+                    }),
+                });
+                if (response.ok) {
+                    setFavorites([...favorites, game]);
+                    setSuccessMessage('Game added to favorites');
+                    console.log('Favorite game added successfully');
+                } else {
+                    console.error('Failed to add favorite game');
+                }
+            } catch (error) {
+                console.error('Error adding favorite game:', error);
+            }
+        }
+    };
+
+
+
     return (
         <div id='search-parent'>
             <div className="search-title">
@@ -37,7 +74,7 @@ const Search = () => {
                 <div className="instructions">CLICK ANY GAME TO DISCOVER NEW ONES</div>
             </div>
             <div className="search-line"/>
-            <div className="search-results"> 
+            <div className="search-results">
                 {searchResults.map(game => (
                     <div key={game.id} className="search-card">
                         {game.cover?.url ? (
@@ -68,8 +105,14 @@ const Search = () => {
                             <a href={game.url} className="learn-more" target="_blank">LEARN MORE</a>
                         </div>
                     </div>
+                    <button onClick={() => handleFavoriteClick(game)}>
+                        <i className="fas fa-heart"></i> Favorite
+                    </button>
+                </div>
                 ))}
             </div>
+            {errorMessage && <p className="error-message">{errorMessage}</p>}
+            {successMessage && <p className="success-message">{successMessage}</p>}
         </div>
     );
 }
