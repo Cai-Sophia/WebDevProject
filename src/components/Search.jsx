@@ -84,18 +84,18 @@ const Search = () => {
                         )}
                         <div className="search-text">
                             <div className="title-container">
-                            <div
-                                className="search-game-title"
-                                onClick={() => handleGameClick(game)}
-                            > {game.name}
+                                <div
+                                    className="search-game-title"
+                                    onClick={() => handleGameClick(game)}
+                                > {game.name}
+                                </div>
+                                {game.aggregated_rating? (
+                                    <h3 className="game-rating">RATING: {Math.round(game.aggregated_rating)}</h3>
+                                ):(
+                                    <h3 className="game-rating">RATING: N/A</h3>
+                                )}
+                                <div className="gameKeywords"></div>
                             </div>
-                            {game.aggregated_rating? (
-                                <h3 className="game-rating">RATING: {Math.round(game.aggregated_rating)}</h3>
-                            ):(
-                                <h3 className="game-rating">RATING: N/A</h3>
-                            )}
-                            <div className="gameKeywords"></div>
-                        </div>
                             {game.summary ? (
                                 <p className={`search-game-summary ${game.summary.length > 200 ? 'scrollable' : ''}`}> {game.summary}
                                 </p>
@@ -104,17 +104,16 @@ const Search = () => {
                             )}
                             <a href={game.url} className="learn-more" target="_blank">LEARN MORE</a>
                         </div>
+                        <button onClick={() => handleFavoriteClick(game)}>
+                            <i className="fas fa-heart"></i> Favorite
+                        </button>
                     </div>
-                    <button onClick={() => handleFavoriteClick(game)}>
-                        <i className="fas fa-heart"></i> Favorite
-                    </button>
-                </div>
                 ))}
             </div>
             {errorMessage && <p className="error-message">{errorMessage}</p>}
             {successMessage && <p className="success-message">{successMessage}</p>}
         </div>
-    );
+    )
 }
 
 export default Search;
