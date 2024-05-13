@@ -7,13 +7,20 @@ const Favorites = () => {
   const [favorites, setFavorites] = useState([]);
 
 
-
   useEffect(() => {
     fetch('http://localhost:8000/test')
       .then(response => response.json())
-      .then(data => setFavorites(data))
+      .then(data => {
+        setFavorites(data);
+        const initialFavorites = {};
+        data.forEach(game => {
+          initialFavorites[game.id] = true;
+        });
+        setGameFavorites(initialFavorites);
+      })
       .catch(error => console.error('Error fetching favorite games:', error));
   }, []);
+
 
   const handleFavoriteClick = async (game) => {
     const response = await fetch('http://localhost:8000/test');
@@ -31,7 +38,7 @@ const Favorites = () => {
       }
       setGameFavorites(prevGameFavorites => ({
         ...prevGameFavorites,
-        [game.id]: false // Update favorited status of this game to false
+        [game.id]: true // Update favorited status of this game to false
       }));
     } 
     else {
@@ -86,12 +93,12 @@ const Favorites = () => {
       <div className='favorite-game-header'>My Favorites</div>
       <div className="favorite-games-container">
         {favorites.map(game => (
-          <div key={game._id} className="game-card">
+          <div key={game._id} className="favorite-game-card">
             <a href={game.url} target="_blank" className="game-link">
-              <div className="image-container">
+              <div className="favorite-image-container">
                 {game.coverUrl && <img src={`https:${game.coverUrl.replace("t_thumb", "t_cover_big_2x")}`} alt={game.name} />}
               </div>
-              <h3 className="game-title">{game.name}</h3>
+              <h3 className="favorite-game-title">{game.name}</h3>
             </a>
             <button className={`favorite-button ${gameFavorites[game.id] ? 'favorited' : ''}`} onClick={() => handleFavoriteClick(game)}>
                 <i className="fas fa-heart"></i>
