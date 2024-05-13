@@ -96,8 +96,10 @@ app.post('/get-games', async (req, res) => {
         },
         body: 'fields name, url, cover.url; limit 500; where themes != (42);'
     });
-    const data = await response.json();
-    res.json(data);
+    response.json()
+        .then(data => {
+            res.json(data);
+        });
 });
 
 app.post('/search', async (req, res) => {
@@ -112,8 +114,10 @@ app.post('/search', async (req, res) => {
         },
         body: `fields name, url, cover.url, summary, aggregated_rating, similar_games, keywords.name, platforms; search "${searchTerm}"; limit 50;`
     });
-    const data = await response.json();
-    res.json(data);
+    response.json()
+        .then(async data => {
+            res.json(data);
+        });
 });
 
 app.post('/get-similar', async (req, res) => {
@@ -128,12 +132,150 @@ app.post('/get-similar', async (req, res) => {
         },
         body: `fields name, url, cover.url; where id = (${similarGames});`
     });
-    const data = await response.json();
-    res.json(data);
+    response.json()
+        .then(data => {
+            res.json(data);
+        });
 });
 
 
+app.post('/get-shooter-games', async (req, res) => {
+    const accessToken = await getAccessToken();
+    const shooterID = 5
+    const response = await fetch('https://api.igdb.com/v4/games', {
+        method: 'POST',
+        headers: {
+            'Client-ID': clientId,
+            'Authorization': `Bearer ${accessToken}`, 
+            'Content-Type': 'application/json'
+        },
+        body: `fields name, url, cover.url; limit 50; where genres = (${shooterID});`
+    })
+    response.json()
+        .then(data => {
+            res.json(data);
+        });
+});
+app.post('/get-platform-games', async (req, res) => {
+    const accessToken = await getAccessToken();
+    const platformID = 8
+    const response = await fetch('https://api.igdb.com/v4/games', {
+        method: 'POST',
+        headers: {
+            'Client-ID': clientId,
+            'Authorization': `Bearer ${accessToken}`, 
+            'Content-Type': 'application/json'
+        },
+        body: `fields name, url, cover.url; limit 50; where genres = (${platformID});`
+    })
+    response.json()
+        .then(data => {
+            res.json(data);
+        });
+});
+app.post('/get-puzzle-games', async (req, res) => {
+    const accessToken = await getAccessToken();
+    const puzzleID = 9
+    const response = await fetch('https://api.igdb.com/v4/games', {
+        method: 'POST',
+        headers: {
+            'Client-ID': clientId,
+            'Authorization': `Bearer ${accessToken}`, 
+            'Content-Type': 'application/json'
+        },
+        body: `fields name, url, cover.url; limit 50; where genres = (${puzzleID});`
+    })
+    response.json()
+        .then(data => {
+            res.json(data);
+        });
+});
+app.post('/get-racing-games', async (req, res) => {
+    const accessToken = await getAccessToken();
+    const racingID = 10
+    const response = await fetch('https://api.igdb.com/v4/games', {
+        method: 'POST',
+        headers: {
+            'Client-ID': clientId,
+            'Authorization': `Bearer ${accessToken}`, 
+            'Content-Type': 'application/json'
+        },
+        body: `fields name, url, cover.url; limit 50; where genres = (${racingID});`
+    })
+    response.json()
+        .then(data => {
+            res.json(data);
+        });
+});
 
+app.post('/get-shooter-games', async (req, res) => {
+    const accessToken = await getAccessToken();
+    const shooterID = 5
+    const response = await fetch('https://api.igdb.com/v4/games', {
+        method: 'POST',
+        headers: {
+            'Client-ID': clientId,
+            'Authorization': `Bearer ${accessToken}`, 
+            'Content-Type': 'application/json'
+        },
+        body: `fields name, url, cover.url; limit 50; where genres = (${shooterID});`
+    })
+    response.json()
+        .then(data => {
+            res.json(data);
+        });
+});
+app.post('/get-platform-games', async (req, res) => {
+    const accessToken = await getAccessToken();
+    const platformID = 8
+    const response = await fetch('https://api.igdb.com/v4/games', {
+        method: 'POST',
+        headers: {
+            'Client-ID': clientId,
+            'Authorization': `Bearer ${accessToken}`, 
+            'Content-Type': 'application/json'
+        },
+        body: `fields name, url, cover.url; limit 50; where genres = (${platformID});`
+    })
+    response.json()
+        .then(data => {
+            res.json(data);
+        });
+});
+app.post('/get-puzzle-games', async (req, res) => {
+    const accessToken = await getAccessToken();
+    const puzzleID = 9
+    const response = await fetch('https://api.igdb.com/v4/games', {
+        method: 'POST',
+        headers: {
+            'Client-ID': clientId,
+            'Authorization': `Bearer ${accessToken}`, 
+            'Content-Type': 'application/json'
+        },
+        body: `fields name, url, cover.url; limit 50; where genres = (${puzzleID});`
+    })
+    response.json()
+        .then(data => {
+            res.json(data);
+        });
+});
+app.post('/get-racing-games', async (req, res) => {
+    const accessToken = await getAccessToken();
+    const racingID = 10
+    const response = await fetch('https://api.igdb.com/v4/games', {
+        method: 'POST',
+        headers: {
+            'Client-ID': clientId,
+            'Authorization': `Bearer ${accessToken}`, 
+            'Content-Type': 'application/json'
+        },
+        body: `fields name, url, cover.url; limit 50; where genres = (${racingID});`
+    })
+    response.json()
+        .then(data => {
+            res.json(data);
+        });
+});
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
 });
