@@ -106,20 +106,16 @@ const SimilarGames = () => {
             <div id='similar-games-container'>
                 {similarResponse.map(game => (
                     <div key={game.id} className="similar-card">
-                        <a href={game.url} target="_blank">
-                            <div className="similar-image">
-                                {game.cover.url && <img src={`https:${game.cover.url.replace("t_thumb", "t_cover_big_2x")}`} alt={game.title} />}
-                            </div>
-                            <h3 className="similar-game-title">{game.name}</h3>
-                        </a>
+                        <div className="similar-image">
+                            {game.cover.url && <img src={`https:${game.cover.url.replace("t_thumb", "t_cover_big_2x")}`} alt={game.title} />}
+                        </div>
+                        <a href={game.url} target="_blank" className="similar-game-title">{game.name}</a>
                         <button className={`favorite-button ${gameFavorites[game.id] ? 'favorited' : ''}`} onClick={() => handleFavoriteClick(game)}>
                             <i className="fas fa-heart"></i>
                         </button>
                     </div>
                 ))}
             </div>
-            {errorMessage && <p className="error-message">{errorMessage}</p>}
-            {successMessage && <p className="success-message">{successMessage}</p>}
         </div>
     );
 };

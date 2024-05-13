@@ -166,8 +166,6 @@ const HomePage = () => {
           ))}
         </div>
       </div>
-      {errorMessage && <p className="error-message">{errorMessage}</p>}
-      {successMessage && <p className="success-message">{successMessage}</p>}
     </div>
   );
 };
