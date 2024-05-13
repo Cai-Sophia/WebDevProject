@@ -10,6 +10,7 @@ const SimilarGames = () => {
     const [favorites, setFavorites] = useState([]);
     const [errorMessage, setErrorMessage] = useState('');
     const [successMessage, setSuccessMessage] = useState('');
+    const [gameFavorites, setGameFavorites] = useState({});
 
     useEffect(() => {
         const getSimilar = () => {
@@ -33,35 +34,70 @@ const SimilarGames = () => {
 
 
     const handleFavoriteClick = async (game) => {
-        const isAlreadyFavorite = favorites.some(favorite => favorite.name === game.name);
-
-        if (isAlreadyFavorite) {
-            setErrorMessage('Game already added to favorites');
-        } else {
-            try {
-                const response = await fetch('http://localhost:8000/insert-favorite', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        name: game.name,
-                        url: game.url,
-                        coverUrl: game.cover?.url,
-                    }),
-                });
-                if (response.ok) {
-                    setFavorites([...favorites, game]);
-                    setSuccessMessage('Game added to favorites');
-                    console.log('Favorite game added successfully');
-                } else {
-                    console.error('Failed to add favorite game');
-                }
-            } catch (error) {
-                console.error('Error adding favorite game:', error);
-            }
+        const response = await fetch('http://localhost:8000/test');
+        if (!response.ok) {
+          throw new Error('Failed to fetch favorite games');
         }
-    };
+        const newFavorites = await response.json();
+        const matchingFavorite = newFavorites.find(favorite => favorite.name === game.name);
+      
+        if (matchingFavorite) {
+          try {
+            handleRemoveFavorite(matchingFavorite._id);
+          } catch (error) {
+            console.error('Error fetching favorite games:', error);
+          }
+          setGameFavorites(prevGameFavorites => ({
+            ...prevGameFavorites,
+            [game.id]: false // Update favorited status of this game to false
+          }));
+        } 
+        else {
+          try {
+            const response = await fetch('http://localhost:8000/insert-favorite', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({
+                name: game.name,
+                url: game.url,
+                coverUrl: game.cover?.url,
+              }),
+            });
+            if (response.ok) {
+              setFavorites(prevFavorites => [...prevFavorites, game]);
+              setSuccessMessage('Game added to favorites');
+              console.log('Favorite game added successfully');
+              setGameFavorites(prevGameFavorites => ({
+                ...prevGameFavorites,
+                [game.id]: true // Update favorited status of this game to false
+              }));
+            } else {
+              console.error('Failed to add favorite game');
+            }
+          } catch (error) {
+            console.error('Error adding favorite game:', error);
+          }
+        }
+      };  
+      
+      const handleRemoveFavorite = async (gameId) => {
+        try {
+          const response = await fetch(`http://localhost:8000/remove-favorite/${gameId}`, {
+            method: 'DELETE',
+          });
+          if (response.ok) {
+            console.log('Favorite game removed successfully');
+            // Remove the game from the state
+            setFavorites(prevFavorites => prevFavorites.filter(favorite => favorite._id !== gameId));
+          } else {
+            console.error('Failed to remove favorite game');
+          }
+        } catch (error) {
+          console.error('Error removing favorite game:', error);
+        }
+      };
 
 
     return (
@@ -76,8 +112,8 @@ const SimilarGames = () => {
                             </div>
                             <h3 className="similar-game-title">{game.name}</h3>
                         </a>
-                        <button onClick={() => handleFavoriteClick(game)}>
-                            <i className="fas fa-heart"></i> Favorite
+                        <button className={`favorite-button ${gameFavorites[game.id] ? 'favorited' : ''}`} onClick={() => handleFavoriteClick(game)}>
+                            <i className="fas fa-heart"></i>
                         </button>
                     </div>
                 ))}

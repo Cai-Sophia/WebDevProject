@@ -8,7 +8,6 @@ const HomePage = () => {
   const [favorites, setFavorites] = useState([]);
   const [errorMessage, setErrorMessage] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
-
   const [gameFavorites, setGameFavorites] = useState({});
 
   useEffect(() => {
@@ -131,8 +130,6 @@ const HomePage = () => {
       console.error('Error removing favorite game:', error);
     }
   };
-
-  
 
   return (
     <div className="home">
