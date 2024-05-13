@@ -48,7 +48,15 @@ const NavBar = () => {
     return (
         <div id='nav-bar'>
             <div id='nav-buttons'>
-                <i className="fa-solid fa-bars" onClick={toggleDropdown}></i>
+                <div className="dropdown">
+                    <i className="fa-solid fa-bars"></i>
+                    <div className='dropdown-menu'>
+                        <div className="dropdown-option" onClick={() => handleDropdownOptionClick("Puzzle Games")}>Puzzle Games</div>
+                        <div className="dropdown-option" onClick={() => handleDropdownOptionClick("Racing Games")}>Racing Games</div>
+                        <div className="dropdown-option" onClick={() => handleDropdownOptionClick("Platforming Games")}>Platforming Games</div>
+                        <div className="dropdown-option" onClick={() => handleDropdownOptionClick("FPS Games")}>FPS Games</div>
+                    </div>
+                </div>
                 <Link to="/" className="home-link">
                     <i className="fa-solid fa-house" style={{fontSize: '.9em'}}></i>
                 </Link>
@@ -56,14 +64,6 @@ const NavBar = () => {
                     <i className="fa-solid fa-heart"></i>
                 </Link>
             </div>
-            {dropdownVisible && ( // Render dropdown if visible
-                <div id='dropdown-menu'>
-                    <div className="dropdown-option" onClick={() => handleDropdownOptionClick("Puzzle Games")}>Puzzle Games</div>
-                    <div className="dropdown-option" onClick={() => handleDropdownOptionClick("Racing Games")}>Racing Games</div>
-                    <div className="dropdown-option" onClick={() => handleDropdownOptionClick("Platforming Games")}>Platforming Games</div>
-                    <div className="dropdown-option" onClick={() => handleDropdownOptionClick("FPS Games")}>FPS Games</div>
-                </div>
-            )}
             <div id='search-query'>
                 <i className="fa-solid fa-search"></i>
                 <input
@@ -74,7 +74,7 @@ const NavBar = () => {
                     onKeyDown={handleKeyPress}
                 />
             </div>
-        </div>
+    </div>
     )
 }
 

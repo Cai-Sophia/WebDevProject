@@ -137,23 +137,25 @@ const FPSPage = () => {
   }
   
   return (
-    <div className="random-games">
-      <div className="random-games-title">RANDOM RACING GAMES</div>
-      <div className="random-games-container-wrapper">
-        <div className="random-games-container"> 
-          {randomGames.map(game => (
-            <div key={game.id} className="game-card">
-              <a href={game.url} target="_blank" className="game-link">
-                <div className="image-container">
-                  {game.cover.url && <img src={`https:${game.cover.url.replace("t_thumb", "t_cover_big_2x")}`} alt={game.title} />}
-                </div>
-                <h3 className="game-title">{game.name}</h3>
-              </a>
-              <button className={`favorite-button ${gameFavorites[game.id] ? 'favorited' : ''}`} onClick={() => handleFavoriteClick(game)}>
-                <i className="fas fa-heart"></i>
-              </button>
-            </div>
-          ))}
+    <div className="category">
+      <div className="random-games">
+        <div className="random-games-title">RANDOM RACING GAMES</div>
+        <div className="random-games-container-wrapper">
+          <div className="random-games-container"> 
+            {randomGames.map(game => (
+              <div key={game.id} className="game-card">
+                <a href={game.url} target="_blank" className="game-link">
+                  <div className="image-container">
+                    {game.cover.url && <img src={`https:${game.cover.url.replace("t_thumb", "t_cover_big_2x")}`} alt={game.title} />}
+                  </div>
+                  <h3 className="game-title">{game.name}</h3>
+                </a>
+                <button className={`favorite-button ${gameFavorites[game.id] ? 'favorited' : ''}`} onClick={() => handleFavoriteClick(game)}>
+                  <i className="fas fa-heart"></i>
+                </button>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </div>

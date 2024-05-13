@@ -60,26 +60,37 @@ body {
   position: relative; /* Add relative positioning */
 }
 
-#dropdown-menu {
+.dropdown {
+  position: relative; /* Ensure dropdown menu is positioned relative to this element */
+  cursor: pointer; /* Change cursor to pointer on hover */
+}
+
+.dropdown-menu {
+  display: none; /* Initially hide dropdown menu */
   position: absolute; /* Position dropdown menu absolutely */
   top: 100%; /* Position below the parent */
   left: 0;
-  background-color: #fff;
+  background-color: #131117;
   border: 1px solid #ccc;
   border-radius: 4px;
   padding: 5px 0;
   z-index: 1000; /* Ensure dropdown is above other content */
+  font-size: 15px;
+  width: 12vw;
+}
+
+.dropdown:hover .dropdown-menu {
+  display: block; /* Show dropdown menu when hovering over the dropdown */
 }
 
 .dropdown-option {
   padding: 8px 15px;
-  cursor: pointer;
+  cursor: pointer; /* Change cursor to pointer on hover */
 }
 
 .dropdown-option:hover {
-  background-color: #f0f0f0;
+  background-color: #f0f0f0; /* Change background color on hover */
 }
-
 
 #search-query {
   height: 100%;
@@ -188,20 +199,16 @@ input {
   position: relative;
 }
 
-.game-card:hover {
-  border: 5px rgb(67, 40, 85) solid;
-  background-color: rgb(40, 35, 44, .6);
+.game-title:hover {
+  color:rgb(76, 108, 183)
 }
 
 .game-title {
-  position: absolute;
-  top: 75%;
-  left: 50%;
-  transform: translateX(-50%);
   color: white;
   font-size: .9em;
   text-align: center;
   width: 100%; 
+  text-decoration: none;
 }
 
 .game-card img {
@@ -600,4 +607,30 @@ input {
 .favorite-game-card img {
   max-height: 90%;
   max-width: 100%;
+}
+
+.random-games-title {
+  font-family: 'Amiko', sans-serif;
+}
+
+.category {
+
+  min-height: 100vh;
+  font-family: 'Amiko', sans-serif;
+}
+
+.category .image-container {
+  height: 50%;
+  width: 80%;
+}
+
+.category .image-container img{
+  max-height: 100%;
+  max-width: 100%;
+}
+
+.category .game-card {
+  display: flex;
+  flex-direction: column;
+
 }
