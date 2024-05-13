@@ -37,16 +37,16 @@ const PlatformPage = () => {
   }
   
   return (
-    <div className="random-games">
-      <div className="random-games-title">RANDOM PLATFORM GAMES</div>
-      <div className="random-games-container-wrapper">
-        <div className="random-games-container"> 
+    <div className="category-games">
+      <div className="category-games-title">RANDOM PLATFORM GAMES</div>
+      <div className="category-games-container-wrapper">
+        <div className="category-games-container"> 
           {randomGames.map(game => (
              <a key={game.id} href={game.url} className="game-card" target="_blank" rel="noopener noreferrer">
-              <div className="image-container">
+              <div className="category-image-container">
                 {game.cover.url && <img src={`https:${game.cover.url.replace("t_thumb", "t_cover_big_2x")}`} alt={game.title} />}
               </div>
-              <h3 className="game-title">{game.name}</h3>
+              <h3 className="category-game-title">{game.name}</h3>
             </a>
           ))}
         </div>

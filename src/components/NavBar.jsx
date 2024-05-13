@@ -22,16 +22,16 @@ const NavBar = () => {
         console.log("Clicked option:", option);
         // For example, if you want to navigate
         switch(option) {
-            case "50 Random Puzzle Games":
+            case "Puzzle Games":
                 navigate("/puzzle");
                 break;
-            case "50 Random Racing Games":
+            case "Racing Games":
                 navigate("/racing");
                 break;
-            case "50 Random Platforming Games":
+            case "Platforming Games":
                 navigate("/platform");
                 break;
-            case "50 Random FPS Games":
+            case "FPS Games":
                 navigate("/fps");
                 break;
             default:
@@ -54,10 +54,10 @@ const NavBar = () => {
             </div>
             {dropdownVisible && ( // Render dropdown if visible
                 <div id='dropdown-menu'>
-                    <div className="dropdown-option" onClick={() => handleDropdownOptionClick("50 Random Puzzle Games")}>50 Random Puzzle Games</div>
-                    <div className="dropdown-option" onClick={() => handleDropdownOptionClick("50 Random Racing Games")}>50 Random Racing Games</div>
-                    <div className="dropdown-option" onClick={() => handleDropdownOptionClick("50 Random Platforming Games")}>50 Random Platforming Games</div>
-                    <div className="dropdown-option" onClick={() => handleDropdownOptionClick("50 Random FPS Games")}>50 Random FPS Games</div>
+                    <div className="dropdown-option" onClick={() => handleDropdownOptionClick("Puzzle Games")}>Puzzle Games</div>
+                    <div className="dropdown-option" onClick={() => handleDropdownOptionClick("Racing Games")}>Racing Games</div>
+                    <div className="dropdown-option" onClick={() => handleDropdownOptionClick("Platforming Games")}>Platforming Games</div>
+                    <div className="dropdown-option" onClick={() => handleDropdownOptionClick("FPS Games")}>FPS Games</div>
                 </div>
             )}
             <div id='search-query'>
