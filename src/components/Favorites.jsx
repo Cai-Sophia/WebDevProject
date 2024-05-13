@@ -10,8 +10,13 @@ const Favorites = () => {
 
   useEffect(() => {
     fetch('http://localhost:8000/test')
-      .then(response => response.json())
-      .then(data => setFavorites(data))
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.json();
+      })
+      .then(data => setFavoriteGames(data))
       .catch(error => console.error('Error fetching favorite games:', error));
   }, []);
 

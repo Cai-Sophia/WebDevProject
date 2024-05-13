@@ -17,7 +17,12 @@ const FPSPage = () => {
         'Content-Type': 'application/json'
       },
     })
-    .then(response => response.json())
+    .then(response => {
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      return response.json();
+    })
     .then(data => {
       // Filter out games without a cover
       const gamesWithCover = data.filter(game => game.cover);
