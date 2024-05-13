@@ -149,7 +149,6 @@ input {
   font-weight: 900;
   margin-left: 10vw;
   margin-top: 16vh;
-  padding-left: 7vw;
 }
 
 .random-games-title {
@@ -537,10 +536,11 @@ input {
 
 /* Favortie Games */
 .favorite-page{
-  min-height: 75vh;
+  min-height: 100vh;
+  margin-top: 20vh;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   font-family: 'Amiko', sans-serif;
   font-weight: 500;
@@ -549,7 +549,6 @@ input {
 }
 
 .favorite-game-header{
-  margin-top: 20vh;
   color: white;
   text-align: center;
   font-weight: 800;
@@ -560,9 +559,45 @@ input {
 
 .favorite-games-container{
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   flex-wrap: wrap;
   overflow: wrap;
   width: 70vw;
   margin-bottom: 3vw;
+}
+
+.favorite-game-card {
+  width: 12vw;
+  height: 35vh;
+  padding: 1em;
+  padding-bottom: .5em;
+  padding-top: 1.5em;
+  margin-bottom: 1vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  background-color: rgb(40, 35, 44, .5);
+  border: 5px rgb(121, 112, 127) solid;
+  border-radius: 20px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+  text-decoration: none;
+  position: relative;
+  margin: 20px;
+}
+
+.favorite-game-title {
+  position: absolute;
+  top: 75%;
+  left: 50%;
+  transform: translateX(-50%);
+  color: white;
+  font-size: .9em;
+  text-align: center;
+  width: 100%; 
+}
+
+.favorite-game-card img {
+  max-height: 90%;
+  max-width: 100%;
 }

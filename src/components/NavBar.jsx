@@ -10,6 +10,7 @@ const NavBar = () => {
     const handleKeyPress = (event) => {
         if (event.key === 'Enter') {
             navigate(`/search/${searchTerm}`);
+            setSearchTerm('');
         }
     };
 
