@@ -32,7 +32,7 @@ const Search = () => {
 
     return (
         <div id='search-parent'>
-            <div className="search-title">
+            <div className="search-title"> 
                 <div>Found {searchResults.length} results for '{params.term}'</div>
                 <div className="instructions">CLICK ANY GAME TO DISCOVER NEW ONES</div>
             </div>

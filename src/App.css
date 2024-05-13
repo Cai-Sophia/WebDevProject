@@ -4,7 +4,10 @@ body {
   padding: 0;
   font-size: 1rem;
 }
-
+.random-games-container-wrapper {
+  display: flex;
+  justify-content: center;
+}
 .app {
   display: flex;
 }
@@ -50,6 +53,40 @@ body {
   color: #41304f;
   cursor: pointer;
 }
+#nav-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #333;
+  padding: 10px;
+}
+
+#nav-buttons {
+  display: flex;
+  align-items: center;
+  position: relative; /* Add relative positioning */
+}
+
+#dropdown-menu {
+  position: absolute; /* Position dropdown menu absolutely */
+  top: 100%; /* Position below the parent */
+  left: 0;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 5px 0;
+  z-index: 1000; /* Ensure dropdown is above other content */
+}
+
+.dropdown-option {
+  padding: 8px 15px;
+  cursor: pointer;
+}
+
+.dropdown-option:hover {
+  background-color: #f0f0f0;
+}
+
 
 #search-query {
   height: 100%;

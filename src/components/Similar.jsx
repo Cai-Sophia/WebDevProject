@@ -36,9 +36,11 @@ const SimilarGames = () => {
                 {similarResponse.map(game => (
                     <a key={game.id} href={game.url} className="similar-card" target="_blank">
                         <div className="similar-image">
+                            
                             {game.cover.url && <img src={`https:${game.cover.url.replace("t_thumb", "t_cover_big_2x")}`} alt={game.title} />}
                         </div>
                         <h3 className="similar-game-title">{game.name}</h3>
+                        
                     </a>
                 ))}
             </div>
