@@ -35,7 +35,10 @@ const NavBar = () => {
                 navigate("/fps");
                 break;
             default:
-                break;
+                // If the option selected is invalid, throw an error messaga and log it to the console
+                const errorMessage = `Invalid option selected: ${option}`;
+                console.error(errorMessage);
+                throw new Error(errorMessage);
         }
         // After handling the click, hide the dropdown
         setDropdownVisible(false);

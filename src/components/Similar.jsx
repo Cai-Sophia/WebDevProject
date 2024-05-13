@@ -22,12 +22,20 @@ const SimilarGames = () => {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({ similarGames: similarGames })
-
             })
-            .then(response => response.json())
+            .then(response => {
+              if (!response.ok) {
+                  throw new Error('Failed to fetch similar games');
+              }
+              return response.json();
+            })
             .then(data => {
                 setSimilarResponse(data);
             })
+            //Used to catch any network or fetch-related errors.
+            .catch(error => {
+              console.error('Error fetching similar games:', error);
+            });
         };
         getSimilar()
     }, [similarGames]);
@@ -39,6 +47,7 @@ const SimilarGames = () => {
           throw new Error('Failed to fetch favorite games');
         }
         const newFavorites = await response.json();
+        
         const matchingFavorite = newFavorites.find(favorite => favorite.name === game.name);
       
         if (matchingFavorite) {

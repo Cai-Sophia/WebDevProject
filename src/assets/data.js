@@ -19,7 +19,7 @@ export const wordPositions = [
     { left: '5%', top: '5%', fontSize: '1.7em' },
     { left: '70%', top: '0%', fontSize: '1.7em'},
     { left: '40%', top: '10%', fontSize: '1.2em'},
-    { left: '70%', top: '35%', fontSize: '1.2em'},
+    { left: '80%', top: '35%', fontSize: '1.2em'},
     { left: '0%', top: '40%', fontSize: '1.9em'},
     { left: '30%', top: '45%', fontSize: '1.2em'},
     { left: '35%', top: '70%', fontSize: '1.9em'},
